@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --card-height: 350px;
+    --card-width: calc(var(--card-height) / 1.5);
+    --radius: 10px;
+    --shadow-one: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    --shadow-two: 2px 35px 32px -8px rgba(0, 0, 0, 0.70);
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a253b;
+}
+.character-img {
+    width: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    filter: drop-shadow(2px 2px 2px #111);
+    position: absolute;
+    z-index: -1;
+}
+.card {
+    height: var(--card-height);
+    width: var(--card-width);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 50px;
+    padding: 0 36px;
+    perspective: 2500px;
+    cursor: pointer;
+    border-radius: var(--radius);
+
+}
+.cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-one);
+}
+.wrapper {
+    transition: all 0.5s;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    background: #111;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-one);
+}
+.card:hover .wrapper {
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+    box-shadow: var(--shadow-two);
+    -webkit-box-shadow: var(--shadow-two);
+    -moz-box-shadow: var(--shadow-two);
+}
+.wrapper::before,
+.wrapper::after {
+    content: '';
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    border-radius: var(--radius);
+    position: absolute;
+    left: 0;
+    box-shadow: var(--shadow-one);
+}
+.wrapper::before {
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(
+        to top,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+.wrapper::after {
+    bottom: 0;
+    background-image: linear-gradient(
+        to top,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+.card:hover .wrapper::before {
+    opacity: 1;
+}
+.card:hover .wrapper::after {
+    height: 120px;
+}
+.card:hover .cover-img {
+    opacity: 0.3;
+}
+.card:hover .character-img {
+    opacity: 1;
+    transform: translate3d(5%, -20%, 670px);
+}
+
+
